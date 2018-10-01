@@ -42,26 +42,26 @@ Class API_Plugin_Activation{
 		?>
 			<div class="wrap">
 				<h2>Settings Page</h2>
+				<div class="e-message"><p></p></div>
 				<div id="tabs">
 				  <ul>
 				    <li><a href="#tabs-1">Settings Page</a></li>
-				    <li><a href="#tabs-2">Shortcode</a></li>
-				    <!-- <li><a href="#tabs-3">Aenean lacinia</a></li> -->
+				    <li><a href="#tabs-2">Shortcode</a></li>				   
 				  </ul>
 				  <div id="tabs-1">
-				    <form action="" method="post" id="apiSettings">
+				  	<form action="" method="post" id="apiSettings">
 				    	<table class="form-table">
 				    		<tbody>
 				    			<tr>
 				    				<th>API Settings URL</th>
 				    				<td>
-										<input type="text" name="aSettingsURL" id="aSettingsURL" placeholder="API URL" class="regular-text" required value="<?php echo get_option('api_url_setting'); ?>">
+										<input type="url" name="aSettingsURL" id="aSettingsURL" placeholder="http://www.example.com/wp-json/wp/v2/posts?_embed" class="regular-text" required value="<?php echo get_option('api_url_setting'); ?>">
 									</td>
 				    			</tr>
 				    		</tbody>
 				    	</table>
 				    	<p>
-							<input type="button" name="saveApiUrl" id="saveApiUrl" value="Save" class="button button-primary">
+							<input type="submit" name="saveApiUrl" id="saveApiUrl" value="Save" class="button button-primary">
 						</p>
 				    </form>
 				  </div>
@@ -83,9 +83,11 @@ Class API_Plugin_Activation{
 		$option_exists = (get_option($optionName, null) !== null);
 		if($option_exists){
 			update_option( $optionName, $apiURL, 'yes');
+			echo 'Updated Successfully';
 		}
 		else{
 			add_option($optionName, $apiURL, '', 'yes'); //insert settings	
+			echo 'Inserted Successfully';
 		}
 		die();
 	}
